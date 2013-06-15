@@ -1,0 +1,8 @@
+:port: 8004
+:address: 127.0.0.1
+
+:initial_messages: 
+ - /animata/osc-for-artists/layer/waves/alpha 0.5
+ - /animata/osc-for-artists/layer/waves/scale 1.5
+
+
