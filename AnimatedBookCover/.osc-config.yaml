@@ -4,5 +4,8 @@
 :initial_messages: 
  - /animata/osc-for-artists/layer/waves/alpha 0.5
  - /animata/osc-for-artists/layer/waves/scale 1.5
+ - /animata/osc-for-artists/layer/waves/move 10 30
+ - /animata/osc-for-artists/layer/body/scale 1.5
+ - /animata/osc-for-artists/layer/body/move 5 10
 
 

@@ -1,0 +1,26 @@
+127.0.0.1:8004
+8005
+# Simple demo scrpit using only pure OSC and  delay commands
+3
+/animata/osc-for-artists/layer/waves/alpha  1.0
+1
+/animata/osc-for-artists/layer/waves/alpha  0.9
+1
+/animata/osc-for-artists/layer/waves/alpha  0.8
+1
+/animata/osc-for-artists/layer/waves/alpha  0.7
+1
+/animata/osc-for-artists/layer/waves/alpha  0.6
+1
+/animata/osc-for-artists/layer/waves/alpha  0.5
+1
+/animata/osc-for-artists/layer/waves/alpha  0.4
+1
+/animata/osc-for-artists/layer/waves/alpha  0.3
+1
+/animata/osc-for-artists/layer/waves/alpha  0.2
+1
+/animata/osc-for-artists/layer/waves/alpha  0.1
+1
+/animata/osc-for-artists/layer/waves/alpha  0.0
+5

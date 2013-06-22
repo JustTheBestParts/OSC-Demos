@@ -1,18 +1,22 @@
 127.0.0.1:8004
 8005
-0.5
-/animata/osc-for-artists/layer/waves/alpha  1.0
-/animata/osc-for-artists/layer/waves/scale  1.0
-10
-# Try to load an external file with some handler methods in it ...
-:load_file||examples/AnimatedBookCover/book_demo_handlers.rb
+# This example shows the use of the global loop and repeated commands
+3
+:interpolate1||/animata/osc-for-artists/layer/waves/alpha||0.0||1.0||3
+7
+:@interpolate1[alpha_loop]||/animata/osc-for-artists/layer/waves/alpha||1.0||0.0||2
 5
-:@radiate[alpha_loop]||2
-:@interpolate1[scale_loop]||/animata/osc-for-artists/layer/waves/scale||0.3||4.0||2
-20
-:stoploop[alpha_loop]
-:stoploop[scale_loop]
-10
-/animata/osc-for-artists/layer/waves/scale   1.0
-/animata/osc-for-artists/layer/waves/alpha   1.0
-20
+:loop_on
+# All commands that come after `loop_on` will be repeated for ever and ever, amen.
+/animata/osc-for-artists/layer/body/scale  1.15
+/animata/osc-for-artists/layer/body/move   80    150
+1
+/animata/osc-for-artists/layer/body/scale  1.3
+/animata/osc-for-artists/layer/body/move   5     170
+1
+/animata/osc-for-artists/layer/body/scale  1.15
+/animata/osc-for-artists/layer/body/move   80    150
+1
+/animata/osc-for-artists/layer/body/scale  1.0
+/animata/osc-for-artists/layer/body/move   117   151
+1
