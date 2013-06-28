@@ -1,0 +1,9 @@
+:port: 8000
+:address: 127.0.0.1
+
+:initial_messages: 
+ - /renoise/jgb/currentLineNotifier
+ - /renoise/song/track/1/device/2/set_parameter_by_index 1 3
+ - /renoise/song/track/1/device/2/bypass 1
+ - /renoise/song/track/1/device/2/set_parameter_by_name Color 1
+ - /renoise/trigger/note_off 8 8 77

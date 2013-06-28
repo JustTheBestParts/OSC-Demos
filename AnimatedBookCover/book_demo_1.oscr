@@ -1,6 +1,7 @@
 127.0.0.1:8004
 8005
-# Simple demo scrpit using only pure OSC and  delay commands
+# Simple demo script using only pure OSC and  
+# delay commands
 3
 /animata/osc-for-artists/layer/waves/alpha  1.0
 1
@@ -24,3 +25,4 @@
 1
 /animata/osc-for-artists/layer/waves/alpha  0.0
 5
+/animata/osc-for-artists/layer/waves/alpha  1.0

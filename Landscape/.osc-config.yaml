@@ -1,0 +1,12 @@
+:port: 8006
+:address: 127.0.0.1
+
+:initial_messages: 
+ - /animata/Landscape/layer/noise/alpha 0.5
+ - /animata/Landscape/layer/noise/scale 1.5
+ - /animata/Landscape/layer/noise/move 10 30
+ - /animata/Landscape/layer/static/scale 1.5
+ - /animata/Landscape/layer/static/alpha 0.5
+ - /animata/Landscape/layer/static/move 5 10
+
+

@@ -1,0 +1,8 @@
+127.0.0.1:8006
+8007
+3
+:load_file||script_handlers.rb
+:@layer_burst[noise_burst]||/animata/Landscape/layer/static/alpha
+:loop_on
+# Will sending a comment do anyhting when looping? No :(
+# 0.4

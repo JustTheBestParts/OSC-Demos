@@ -1,0 +1,23 @@
+127.0.0.1:8000
+8005
+# Send commands to a Renoise instance.
+# Use the midi-listener code to track song events to know when to send various messages.
+# 
+:load_file||midi-hook/midi-hook.rb
+:load_file||song-mixer/midi-handlers.rb
+:create_listener
+/renoise/song/track/10/device/1/set_parameter_by_name Volume  0.71
+/renoise/transport/start
+
+
+:register_method_for_event||Note On: C3||swap_tracks||C3||32||6||7
+:register_method_for_event||Note On: C3||wrap_up||C3||58
+:register_method_for_event||Note On: G9||debuggery||G9||/renoise/trigger/note_on
+:register_method_for_event||Note On: C3||play_lead||/renoise/trigger/note_on
+:register_method_for_event||Note On: G9||tweak_noise||G9||/renoise/song/track/5/device/1/set_parameter_by_name||Volume 
+:register_method_for_event||Note On: G9||tweak_hh||G9||/renoise/song/track/4/device/2/set_parameter_by_name||Feedback||6
+:run_listener
+3
+:loop_on
+# Sit and spin, handling messages from the MIDI bridge. Seem to get better results with that 1 second pause in there.
+0.2

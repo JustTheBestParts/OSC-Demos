@@ -14,6 +14,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Arrays;
 
+import AP5Osc
+
 
 int animationLoop  = 1;
 int ANIMATE_ON_COUNT = 3;
@@ -22,14 +24,11 @@ int animationCounter = 0;
 int maxAnimationLoop = 5;
 
 HashMap sceneTable = new HashMap();
-// HashMap mainCharacterScenes = new HashMap();
+HashMap mainCharacterScenes = new HashMap();
 
-String mainSceneName = "osc-for-artists";
+String mainSceneName = "Landscape";
 
 AnimataP5 mainScene;
-
-AnimataP5Osc ap5osc;
-
 
 // Adding this, and having it return true, makes your sketch fullscree, no window borders.
 // It's set to false for demo purposes
@@ -41,24 +40,41 @@ boolean sketchFullScreen() {
 
 //-----------------------------------------------------------
 void setup() {
-  size(508, 738, OPENGL);
-  ap5osc = new AnimataP5Osc(this);
-
+  size(1200, 500, OPENGL);
   loadScene(mainSceneName);
   mainScene = (AnimataP5) sceneTable.get(mainSceneName);
-  ap5osc.loadData();
-  ap5osc.setupOsc();
+  loadData();
+  setupOsc();
+
+
 }
+
 
 //-----------------------------------------------------------
 void draw() {
-  background(255);
+  background(0);
   mainScene.draw(0,0);
 }
 
 
-
-//-----------------------------------------------------------
-void handleOsc(OscMessage oscMsg) {
+void dynojames(String s) {
+  println("   DYNO! ");
 
 }
+// Override this in you primary sketch pde file to process
+// any OSC messages not already handled in this file
+void processWithCustomHandlers(OscMessage oscMsg){
+
+  String addrPattern = (String)oscMsg.addrPattern();
+
+  // print("\t\t\t### received an osc message.");
+  //print(" addrpattern: "+oscMsg.addrPattern());
+  //println(" typetag: "+oscMsg.typetag());
+  //  println(" arguments: "+oscMsg.arguments()[0].toString());
+
+if (addrPattern.equals("/landscape/renderDualTones") ) {
+    renderDualTones(oscMsg.arguments()[0].toString(), oscMsg.arguments()[1].toString() );
+    }
+
+}
+

@@ -11,6 +11,7 @@ String localOSCAddress  = "0.0.0.0";
 int clientOSCPort    = 9000;
 int localOSCPort     = 8000;
 
+
 //-----------------------------------------------------------
 void setupOsc()  {
   loadData();
@@ -19,7 +20,11 @@ void setupOsc()  {
   println(" Using OSC config values:");
   println(" localOSCAddress:\t" + localOSCAddress);
   println(" localOSCPort:\t" + localOSCPort);
+
+
 }
+
+
 
 
 //-----------------------------------------------------------
@@ -63,6 +68,32 @@ void oscEvent(OscMessage oscMsg) {
   //  Assume this:
   //      /animata/<sceneName>/[itemType]/<itemName>/[actionOrQuery] (args ...)
 
+//////  NEW APPROACH TO HANDLING ADDITONAL PATTERNS: 
+//        have an explciti return on any match on the built-in handlers,
+//        and if you have not yet exited the method call a sub-delegate method.
+//
+//        By default that methods is defined to do nothing, but if you override it
+//        you can make it handle the OSC stuff
+//
+//
+//  println("Go look up '" + oscMsg.addrPattern() + "' ...");
+//  
+//    Method m = (Method) oscHandlerMap.get(oscMsg.addrPattern());
+//  
+//    if (m != null ) {
+//  
+//        println("Found '" + oscMsg.addrPattern() + "' ...");
+//      try {
+//         m.invoke(oscMsg.arguments());
+//    } catch(IllegalAccessException iae) {
+//      println("Yikes! IllegalAccessException");
+//    }
+//      catch(java.lang.reflect.InvocationTargetException ite) {
+//      println("Yikes! InvocationTargetException");
+//    }
+//    
+//     return;
+//  }
 
   int realm     = 1;
   int sceneName = 2;
@@ -87,26 +118,66 @@ void oscEvent(OscMessage oscMsg) {
     if (parts[itemType].equals("layer") ) {
       println("Act on layer '" + parts[itemID] + "'" );
       handleLayerAction( parts[sceneName], parts[itemID], subset(parts, itemID+1), oscMsg.arguments() );
+     return;
     }
 
     if (parts[itemType].equals("joint") ) {
       println("Act on joint '" + parts[itemID] + "'" );
       handleJointAction( parts[sceneName], parts[itemID], subset(parts, itemID+1), oscMsg.arguments() );
+      return;
     }
 
     if (parts[itemType].equals("bone") ) {
       println("@  @ @ @ A ct on bone '" + parts[itemID] + "'" );
       handleBoneAction( parts[sceneName], parts[itemID], subset(parts, itemID+1), oscMsg.arguments() );
+      return;
     }
   
     if (parts[itemType].equals("load") ) {
       println("Load scene '" + parts[sceneName] + "'" );
       loadScene( parts[sceneName] );
+      return;
     }
 
   } 
 
+  try {
+//    Class cArgs[] = Class[1];
+  // cArgs[0] =oscMsg.getClass() ;
+    // Method m = this.getClass().getMethod("processWithCustomHandlers", OscMessage.class );
+println("Try to reference the method ..");
+
+    Method m = this.getClass().getMethod("dynojames", String.class);
+
+
+     println("Try to invoke the method ..");
+
+     // THis keeps failing  with 'java.lang.reflect.InvocationTargetException'
+     // Perhaps the better approach is to bundle up the defalt Animata message into
+     // a library and then, if you use that lib, you MUST implement 'processWithCustomHandlers'
+     // or whatever is the best name.
+     // This avoids the overhead of looking for that method (though that could be cached and a
+     // flag set)
+     //
+     m.invoke("Foo");
+  } catch( NoSuchMethodException e ) {
+    println("NoSuchMethodException: " + e );
+  } catch(IllegalAccessException iae){
+    println("IllegalAccessException: " + iae  );
+  }
+  catch(java.lang.reflect.InvocationTargetException ite) {
+    println("java.lang.reflect.InvocationTargetException: " + ite   );
+  } 
+   
+  //processWithCustomHandlers(oscMsg);
+
 }
+
+// Override this in you primary sketch pde file to process
+// any OSC messages not already handled in this file
+//void processWithCustomHandlers(OscMessage oscMsg){
+
+//}
 
 
 // How much do we want to assume?  We need the scene and layer name.
