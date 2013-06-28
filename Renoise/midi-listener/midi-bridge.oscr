@@ -1,0 +1,12 @@
+127.0.0.1:8004
+8001
+:load_file||midi-listener.rb
+:create_listener
+:register_message_for_note_name||C3||/animata/osc-for-artists/layer/waves/alpha||0.0
+:register_message_for_note_name||D3||/animata/osc-for-artists/layer/waves/alpha||1.0
+:run_listener
+
+#30
+:loop_on
+# Sit and spin, handling messages from the MIDI bridge. Seem to get better results with that 1 second pause in there.
+0.2
