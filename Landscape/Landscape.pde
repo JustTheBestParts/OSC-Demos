@@ -14,10 +14,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Arrays;
 
-import AP5Osc
 
 
-int animationLoop  = 1;
+int animationLoop    = 1;
 int ANIMATE_ON_COUNT = 3;
 
 int animationCounter = 0;
@@ -37,6 +36,8 @@ boolean sketchFullScreen() {
   return false;
 }
 
+PImage leftFilter;
+PImage rightFilter;
 
 //-----------------------------------------------------------
 void setup() {
@@ -46,6 +47,9 @@ void setup() {
   loadData();
   setupOsc();
 
+leftFilter  = loadImage("leftFilter.png");
+rightFilter = loadImage("rightFilter.png");
+  
 
 }
 
@@ -77,4 +81,15 @@ if (addrPattern.equals("/landscape/renderDualTones") ) {
     }
 
 }
+
+
+void loadTintedOverlayLeft(int c) {
+
+
+  AnimataP5 ap5 = (AnimataP5) sceneTable.get(mainSceneName);
+  ap5.setNewMeshImage( leftFilter,  layerName); 
+}
+
+
+
 
