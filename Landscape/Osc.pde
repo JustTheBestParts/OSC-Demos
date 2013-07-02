@@ -54,6 +54,11 @@ void loadData(){
 }
 
 
+int argToInt(Object n) {
+  return parseInt( n.toString() );
+}
+
+
 //-----------------------------------------------------------
 void oscEvent(OscMessage oscMsg) {
 
@@ -68,33 +73,6 @@ void oscEvent(OscMessage oscMsg) {
   //  Assume this:
   //      /animata/<sceneName>/[itemType]/<itemName>/[actionOrQuery] (args ...)
 
-//////  NEW APPROACH TO HANDLING ADDITONAL PATTERNS: 
-//        have an explciti return on any match on the built-in handlers,
-//        and if you have not yet exited the method call a sub-delegate method.
-//
-//        By default that methods is defined to do nothing, but if you override it
-//        you can make it handle the OSC stuff
-//
-//
-//  println("Go look up '" + oscMsg.addrPattern() + "' ...");
-//  
-//    Method m = (Method) oscHandlerMap.get(oscMsg.addrPattern());
-//  
-//    if (m != null ) {
-//  
-//        println("Found '" + oscMsg.addrPattern() + "' ...");
-//      try {
-//         m.invoke(oscMsg.arguments());
-//    } catch(IllegalAccessException iae) {
-//      println("Yikes! IllegalAccessException");
-//    }
-//      catch(java.lang.reflect.InvocationTargetException ite) {
-//      println("Yikes! InvocationTargetException");
-//    }
-//    
-//     return;
-//  }
-
   int realm     = 1;
   int sceneName = 2;
   int itemType  = 3;
@@ -107,10 +85,27 @@ void oscEvent(OscMessage oscMsg) {
 
   // Done mostly to suggest a way to process messages meant for different aspects of the sketch
   String reAnimata = "animata";
-  String reSketch = "sketch";
+  String reSketch = "landscape";
+  String addrPattern = oscMsg.addrPattern();
+  println(addrPattern);
 
-  println(oscMsg.addrPattern());
+  // Stuff more or less specific to this sketch
+  if (parts[realm].equals(reSketch) ) {
+    println(reSketch + " message. Check '/" + reSketch + "/renderLeadTones'" );
 
+    // These are likely to be fairly task-specific with no clear hierarchy
+    if ( addrPattern.equals("/" + reSketch + "/renderLeadTones") ) {
+      println("\tRender lead tones! " );
+      renderLeadTones( argToInt(oscMsg.arguments()[0]), argToInt(oscMsg.arguments()[1]) );
+    } else {
+      println("\tNO MATCH ON '" + addrPattern + "'" );
+
+    }
+
+    return;
+  }
+
+  // Animata scene handlers
   if (parts[realm].equals(reAnimata) ) {
     println("Animata message. Scene name " + parts[sceneName] + "parts[itemType] = '" + parts[itemType] + "'" );
 
@@ -118,7 +113,7 @@ void oscEvent(OscMessage oscMsg) {
     if (parts[itemType].equals("layer") ) {
       println("Act on layer '" + parts[itemID] + "'" );
       handleLayerAction( parts[sceneName], parts[itemID], subset(parts, itemID+1), oscMsg.arguments() );
-     return;
+      return;
     }
 
     if (parts[itemType].equals("joint") ) {
@@ -132,7 +127,7 @@ void oscEvent(OscMessage oscMsg) {
       handleBoneAction( parts[sceneName], parts[itemID], subset(parts, itemID+1), oscMsg.arguments() );
       return;
     }
-  
+
     if (parts[itemType].equals("load") ) {
       println("Load scene '" + parts[sceneName] + "'" );
       loadScene( parts[sceneName] );
@@ -142,24 +137,24 @@ void oscEvent(OscMessage oscMsg) {
   } 
 
   try {
-//    Class cArgs[] = Class[1];
-  // cArgs[0] =oscMsg.getClass() ;
+    //    Class cArgs[] = Class[1];
+    // cArgs[0] =oscMsg.getClass() ;
     // Method m = this.getClass().getMethod("processWithCustomHandlers", OscMessage.class );
-println("Try to reference the method ..");
+    println("Try to reference the method ..");
 
     Method m = this.getClass().getMethod("dynojames", String.class);
 
 
-     println("Try to invoke the method ..");
+    println("Try to invoke the method ..");
 
-     // THis keeps failing  with 'java.lang.reflect.InvocationTargetException'
-     // Perhaps the better approach is to bundle up the defalt Animata message into
-     // a library and then, if you use that lib, you MUST implement 'processWithCustomHandlers'
-     // or whatever is the best name.
-     // This avoids the overhead of looking for that method (though that could be cached and a
-     // flag set)
-     //
-     m.invoke("Foo");
+    // THis keeps failing  with 'java.lang.reflect.InvocationTargetException'
+    // Perhaps the better approach is to bundle up the defalt Animata message into
+    // a library and then, if you use that lib, you MUST implement 'processWithCustomHandlers'
+    // or whatever is the best name.
+    // This avoids the overhead of looking for that method (though that could be cached and a
+    // flag set)
+    //
+    m.invoke("Foo");
   } catch( NoSuchMethodException e ) {
     println("NoSuchMethodException: " + e );
   } catch(IllegalAccessException iae){
@@ -168,7 +163,7 @@ println("Try to reference the method ..");
   catch(java.lang.reflect.InvocationTargetException ite) {
     println("java.lang.reflect.InvocationTargetException: " + ite   );
   } 
-   
+
   //processWithCustomHandlers(oscMsg);
 
 }
@@ -257,8 +252,19 @@ void handleBoneAction(String sceneName, String boneName, String[] messageTail, O
   } else {
 
     println("Have no handler for action " + action );
-}
+  }
 
   println("End of handleBoneAction ");
 
 }
+
+// If you try to update a mesh image while a sketch is in the middle of the
+// draw rendering loop you get funky results.
+// So, instead, we set some values that are checked on each pass of draw()
+// and if non-zero they they are used to update the filter.
+void renderLeadTones(int n1, int n2) {
+   tone1 = n1;
+   tone2 = n2;
+}
+
+

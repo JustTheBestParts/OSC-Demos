@@ -2,6 +2,8 @@
 :address: 127.0.0.1
 
 :initial_messages: 
+ - /landscape/renderLeadTones 50 90
+ - /landscape/renderLeadTones 100 70
  - /animata/Landscape/layer/noise/alpha 0.5
  - /animata/Landscape/layer/noise/scale 1.5
  - /animata/Landscape/layer/noise/move 10 30
