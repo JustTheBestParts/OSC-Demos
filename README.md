@@ -5,6 +5,25 @@ OSC-Demos
 A collection of simple projects meant to show off the use of OSC.
 
 
+SpriteDemo
+----------
+
+This requires the [AnimataP5-ng](https://github.com/Neurogami/AnimataP5-ng) library.
+
+It shows the use of AnimataP5-ng feature that allows you to define a series of images for a single layeer.  The images are then cycled through, creating an animation effect.
+
+There is also  an `osc-repl` file you can use to manipulate the image.
+
+After starting the `SpriteDemo.pde` sketch, run `osc-repl SpriteDemo/.osc-config.yaml`
+
+This will preload some OSC messages you can use to alter the sprite.
+
+Some things to note:
+
+You can flip the orientation of the sprite with `/animata/sprite/orientation/(right|left)` but what's really happening is that the sketch is changing the visibilty of one or the other sprite layer.  There's an intersting (or annoying) side-effect with this: If you move the sprite while it is facing one direction (e.g. `/animata/sprite_left/layer/main_head/move   500.0 30.0`) and then change the orientation, you'll see that layer back where you last left it.
+
+The fix for this is simple: Whenever you move one sprite, move the other.  I left it as-is to help make the point. Add the code to fix this yourself as an excuse to play around. See what else you can think to do while in there.  
+
 
 
 AnimatedBookCover
@@ -92,4 +111,4 @@ Feed your head.
 
 Hack your world.
 
-Live curious.
+Live curiou.

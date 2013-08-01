@@ -27,7 +27,6 @@ task 'song-mixer' do
     end
   end
 
-
   sleep 5
 end
 

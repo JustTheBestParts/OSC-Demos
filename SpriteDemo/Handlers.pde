@@ -30,7 +30,7 @@ void setTextureImage(String sceneName,  String layerName, String imageName) {
 
 void setTexturePImage(String sceneName,  String layerName, PImage image) {
   AnimataP5 ap5 = (AnimataP5) sceneTable.get(sceneName);
-  ap5.setNewMeshImage( image,  layerName); 
+  ap5.setNewMeshPImage( image,  layerName); 
 }
 
 /* 
