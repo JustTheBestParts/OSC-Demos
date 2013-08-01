@@ -1,8 +1,10 @@
 <?xml version="1.0" ?>
 <animata version="0.004">
     <layer name="main_layer" x="0.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
-        <layer name="noise" x="0.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
-            <texture location="noise.png" x="0.000000" y="0.000000" scale="1.000000" />
+
+
+        <layer name="buildings1" x="0.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
+            <texture location="buildings1.png" x="0.000000" y="0.000000" scale="1.000000" />
             <mesh>
                 <vertices>
                     <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
@@ -16,9 +18,41 @@
                 </faces>
             </mesh>
         </layer>
-        <layer name="static" x="0.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
-            <texture location="static.png" x="0.000000" y="0.000000" scale="1.000000" />
+
+        <layer name="buildings2" x="1200.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
+            <texture location="buildings2.png" x="0.000000" y="0.000000" scale="1.000000" />
             <mesh>
+                <vertices>
+                    <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
+                    <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
+                    <vertex x="1200.500000" y="477.440002" u="1.000417" v="0.954880" selected="0" />
+                    <vertex x="1200.500000" y="1.280014" u="1.000417" v="0.002560" selected="0" />
+                </vertices>
+                <faces>
+                    <face v0="3" v1="1" v2="0" />
+                    <face v0="0" v1="3" v2="2" />
+                </faces>
+            </mesh>
+        </layer>
+
+        <layer name="noise" x="0.000000" y="0.000000" z="0.000000" alpha="0.700000" scale="1.000000" vis="1">
+            <texture location="noise.png" x="0.000000" y="0.000000" scale="1.000000" />
+            <mesh> 
+                <vertices>
+                    <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
+                    <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
+                    <vertex x="1200.500000" y="477.440002" u="1.000417" v="0.954880" selected="0" />
+                    <vertex x="1200.500000" y="1.280014" u="1.000417" v="0.002560" selected="0" />
+                </vertices>
+                <faces>
+                    <face v0="3" v1="1" v2="0" />
+                    <face v0="0" v1="3" v2="2" />
+                </faces>
+            </mesh>
+        </layer>
+        <layer name="static" x="0.000000" y="0.000000" z="0.000000" alpha="0.700000" scale="1.000000" vis="1">
+            <texture location="static.png" x="0.000000" y="0.000000" scale="1.000000" />
+            <mesh> 
                 <vertices>
                     <vertex x="-2.699951" y="476.159973" u="-0.002250" v="0.952320" selected="0" />
                     <vertex x="-5.259979" y="0.000015" u="-0.004383" v="0.000000" selected="0" />
@@ -33,7 +67,7 @@
         </layer>
         <layer name="leftFilter" x="0.000000" y="0.000000" z="0.000000" alpha="0.300000" scale="1.000000" vis="1" >
             <texture location="leftFilter.png" x="0.000000" y="0.000000" scale="1.000000" />
-            <mesh>
+            <mesh> 
                 <vertices>
                     <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
                     <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
@@ -48,7 +82,7 @@
             </layer>
         <layer name="rightFilter" x="0.000000" y="0.000000" z="0.000000" alpha="0.300000" scale="1.000000" vis="1" >
             <texture location="rightFilter.png" x="0.000000" y="0.000000" scale="1.000000" />
-            <mesh>
+            <mesh> 
                 <vertices>
                     <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
                     <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />

@@ -39,19 +39,30 @@ boolean sketchFullScreen() {
 PImage leftFilter;
 PImage rightFilter;
 
-
 PImage leftFilterTemp;
 PImage rightFilterTemp;
-
 
 int tone1 = 0;
 int tone2 = 0;
 
+int minTone1 = 40;
+int maxTone1 = 52;
+
+int buildings1X = 0;
+int buildings2X  = 0;
+
+
+int minTone2 = 62;
+int maxTone2 = 74;
+
+
 //-----------------------------------------------------------
 void setup() {
   size(1200, 480, OPENGL);
-   frameRate(30);
+  frameRate(60);
   loadScene(mainSceneName);
+  buildings2X  = width;
+
   mainScene = (AnimataP5) sceneTable.get(mainSceneName);
   loadData();
   setupOsc();
@@ -68,15 +79,38 @@ void draw() {
   background(0);
   if (tone1 > 0 && tone2 > 0 ) {
     println("\tRENDER LEAD TONES with " + tone1 + ", " + tone2 );
-      loadTintedOverlayRight(tone2); 
-      loadTintedOverlayLeft(tone1);
+    loadTintedOverlayRight(tone2); 
+    loadTintedOverlayLeft(tone1);
 
-      tone1 = 0;
-      tone2 = 0;
+    tone1 = 0;
+    tone2 = 0;
   }
+
+  shiftBuildings();
   mainScene.draw(0,0);
 }
 
+void shiftBuildings() {
+  buildings1X--;
+  buildings2X--;
+  
+  if (buildings1X < (width *-1) ) {
+    buildings1X = width;
+  }
+
+  if (buildings2X < (width *-1) ) {
+    buildings2X = width;
+  }
+
+
+  float x1 = buildings1X * 1.0;
+  float x2 = buildings2X * 1.0;
+
+  moveLayerAbsolute(mainSceneName, "buildings1", x1, 0.0);
+  moveLayerAbsolute(mainSceneName, "buildings2", x2, 0.0);
+
+  
+}
 
 void dynojames(String s) {
   println("   DYNO! ");
@@ -101,6 +135,7 @@ void processWithCustomHandlers(OscMessage oscMsg){
 
 
 void loadTintedOverlayLeft(int c) {
+  println("loadTintedOverlayLeft("+c+")" );
   leftFilterTemp.copy(leftFilter, 0, 0, leftFilter.width, leftFilter.height, 0, 0, leftFilter.width, leftFilter.height);
   leftFilterTemp =  leftTinter(leftFilter, leftFilterTemp, c);
   println("mainScene.setNewMeshPImage( leftFilterTemp,  'leftFilter'); " );
@@ -109,6 +144,7 @@ void loadTintedOverlayLeft(int c) {
 
 
 void loadTintedOverlayRight(int c) {
+  println("loadTintedOverlayRight("+c+")" );
   rightFilterTemp.copy(rightFilter, 0, 0, rightFilter.width, rightFilter.height, 0, 0, rightFilter.width, rightFilter.height);
   rightFilterTemp =  rightTinter(rightFilter, rightFilterTemp, c);
   println("mainScene.setNewMeshPImage( rightFilterTemp,  'rightFilter'); " );
@@ -122,11 +158,11 @@ void loadTintedOverlayRight(int c) {
 // floats needed for a spectrum gradient?
 // a low C gives you44
 float leftFilterNewR(int c){
-  return map(c, 44, 110, 0, 255); 
+  return map(c, minTone1, maxTone1, 0, 255); 
 }
 
 float  leftFilterNewB(int c) {
-  return map(c, 44, 110, 255, 0); 
+  return map(c, minTone1, maxTone1, 255, 0); 
 }
 
 
@@ -134,7 +170,7 @@ float  leftFilterNewB(int c) {
 // 00 ff 00 ->   ff ff 00
 // So, seems like you only need to shift the red?
 float rightFilterNewR(int c){
-  return map(c, 44, 110, 0, 255); 
+  return map(c, minTone2, maxTone2, 0, 255); 
 }
 
 
@@ -147,43 +183,53 @@ float rightFilterNewR(int c){
 //
 // We assume the alpha color is 255 so do not change that value.
 //   
+//   Now, there's a lot sad coupling here.  The OSC script and MIDI handlers
+//   have hard-code numbers for selecting the lead notes.
+//
+//   Now this file needs to know those values, and they end up
+//   hard-code here.
+//
+//   Ideally the OSC script would send the note ranges so that
+//   if that code chages this code knows to handle it.
+//
+//   But not right now
 PImage leftTinter(PImage img, PImage destImg, int c){
 
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       int loc = x + y*width;
-      
+
       float r = red(img.pixels[loc]);
       float g = green(img.pixels[loc]);
       float b = blue(img.pixels[loc]);
-      
+
       if ( r < 255.0 || g < 255.0 || b < 255.0  ) {
         r =  leftFilterNewR(c); 
         g = 0.0; 
         b = leftFilterNewB(c);
-     }
+      }
       destImg.pixels[loc] =  color(r,g,b);          
     }
   }
   return destImg;
 }
 
-// Grean stays at 255. Blue stays at 0
+// Green stays at 255. Blue stays at 0
 PImage rightTinter(PImage img, PImage destImg, int c){
 
   for (int y = 0; y < height; y++) {
     for (int x = 0; x < width; x++) {
       int loc = x + y*width;
-      
+
       float r = red(img.pixels[loc]);
       float g = green(img.pixels[loc]);
       float b = blue(img.pixels[loc]);
-      
+
       if ( r < 255.0 || g < 255.0 || b < 255.0  ) {
         r =  rightFilterNewR(c); 
         g = 255.0; 
         b = 0.0;
-     }
+      }
       destImg.pixels[loc] =  color(r,g,b);          
     }
   }

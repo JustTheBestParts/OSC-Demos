@@ -1,5 +1,7 @@
 require 'pp'
 
+require 'osc-ruby'
+
 
 # This class is reopening the original MidiListener that is defined in the 
 # confusingly named midi-hook/midi-hook.rb
@@ -8,6 +10,9 @@ class MidiListener
   @last_mute  = nil
   @unmute     = nil
   @lead_intr  = 8
+
+  include  OSC
+
 
 
   def relay_to_ap5 verbose_name
@@ -104,6 +109,8 @@ class MidiListener
   end
 
   def play_lead *args
+       @osc_client_p5 ||= Client.new '127.0.0.1', 8006 # HACK FIXME so that sht is not hard-coded.
+
     if @note1
       @runner.execute_command "/renoise/trigger/note_off  #{@lead_intr} 8 #{@note1} ", :skip_appending
     end
@@ -132,9 +139,29 @@ class MidiListener
     end
 
     Thread.new do
-      @runner.execute_command "/renoise/trigger/note_on  #{@lead_intr} 8 #{@note1} #{vol}", :skip_appending
-      @runner.execute_command "/renoise/trigger/note_on  #{@lead_intr} 8 #{@note2} #{vol}", :skip_appending
+      
+
+# How do we send this to yet another OSC server?  The scripter only knows about Renoise OSC server.
+      # Short plan: Have this particular script have it's own SC server.
+      # Long plan: Consider having osc-scripter talk to multiple OSC servers, perhaps keyed by addr_pattern
+      # OR: Tell osc-scripter to load a (reusable) file that will provide this extra OSC-sending power
+      # along wth methods of for handling this so that you can use `execute_command`  and not
+      # have helper files lke this know too much about how things interactions work
+     msg = OSC::Message.new "/landscape/renderLeadTones", @note1, @note2
+           t = Thread.new do
+          begin
+            @osc_client_p5.send msg
+          rescue 
+            warn '!'*80
+            warn "Error sending OSC message #{msg.inspect}: #{$!}"
+            warn "@client = #{@client.inspect}"
+            warn '!'*80
+          end
+        end
     end
+
+          @runner.execute_command "/renoise/trigger/note_on  #{@lead_intr} 8 #{@note1} #{vol}", :skip_appending
+      @runner.execute_command "/renoise/trigger/note_on  #{@lead_intr} 8 #{@note2} #{vol}", :skip_appending
   end
 
 end
