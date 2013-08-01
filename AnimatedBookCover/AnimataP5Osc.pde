@@ -89,7 +89,7 @@ class AnimataP5Osc {
   /*********************************************************************/
   void setTexturePImage(String sceneName,  String layerName, PImage image) {
     ap5 = sceneManager.getScene(sceneName);
-    ap5.setNewMeshImage( image,  layerName); 
+    ap5.setNewMeshPImage(image,  layerName); 
   }
 
 
