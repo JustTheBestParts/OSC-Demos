@@ -1,8 +1,6 @@
 <?xml version="1.0" ?>
 <animata version="0.004">
     <layer name="main_layer" x="0.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
-
-
         <layer name="buildings1" x="0.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
             <texture location="buildings1.png" x="0.000000" y="0.000000" scale="1.000000" />
             <mesh>
@@ -11,15 +9,58 @@
                     <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
                     <vertex x="1200.500000" y="477.440002" u="1.000417" v="0.954880" selected="0" />
                     <vertex x="1200.500000" y="1.280014" u="1.000417" v="0.002560" selected="0" />
+                    <vertex x="233.294037" y="103.772514" u="0.224659" v="0.357818" selected="0" />
+                    <vertex x="545.954529" y="180.363632" u="0.454962" v="0.360727" selected="0" />
+                    <vertex x="501.661255" y="251.904160" u="0.458598" v="0.730182" selected="1" />
+                    <vertex x="206.718246" y="479.200317" u="0.148295" v="0.747636" selected="1" />
+                    <vertex x="957.590820" y="256.000000" u="0.797992" v="0.512000" selected="0" />
+                    <vertex x="1199.045410" y="267.636353" u="0.999205" v="0.535273" selected="0" />
+                    <vertex x="604.136353" y="0.000015" u="0.503447" v="0.000000" selected="0" />
+                    <vertex x="272.500000" y="478.545441" u="0.227083" v="0.957091" selected="0" />
+                    <vertex x="867.409058" y="475.636353" u="0.722841" v="0.951273" selected="0" />
                 </vertices>
                 <faces>
-                    <face v0="3" v1="1" v2="0" />
-                    <face v0="0" v1="3" v2="2" />
+                    <face v0="9" v1="12" v2="2" />
+                    <face v0="2" v1="9" v2="3" />
+                    <face v0="3" v1="10" v2="8" />
+                    <face v0="8" v1="3" v2="9" />
+                    <face v0="9" v1="8" v2="12" />
+                    <face v0="10" v1="5" v2="8" />
+                    <face v0="8" v1="12" v2="6" />
+                    <face v0="6" v1="8" v2="5" />
+                    <face v0="5" v1="6" v2="11" />
+                    <face v0="12" v1="6" v2="11" />
+                    <face v0="5" v1="1" v2="10" />
+                    <face v0="5" v1="11" v2="4" />
+                    <face v0="4" v1="5" v2="1" />
+                    <face v0="1" v1="4" v2="7" />
+                    <face v0="7" v1="1" v2="0" />
+                    <face v0="0" v1="7" v2="11" />
+                    <face v0="11" v1="4" v2="7" />
                 </faces>
             </mesh>
+            <skeleton>
+                <joints>
+                    <joint x="298.303619" y="238.923843" fixed="0" selected="0" osc="0" />
+                    <joint x="401.850891" y="376.411804" fixed="1" selected="0" osc="0" />
+                    <joint x="423.772736" y="32.000046" fixed="1" selected="0" osc="0" />
+                </joints>
+                <bones>
+                    <bone j0="2" j1="0" stiffness="0.500000" lm="1.240015" lmmin="0.820000" lmmax="1.290000" tempo="0.054000" time="478.428497" size="195.174866" selected="0" radius="1.000000">
+                        <attached>
+                            <vertex id="4" d="131.949402" w="0.010000" ca="41.522785" sa="125.245773" />
+                        </attached>
+                    </bone>
+                    <bone j0="0" j1="1" stiffness="0.500000" lm="0.946563" lmmin="0.740000" lmmax="1.040000" tempo="0.039000" time="517.976135" size="181.823990" selected="1" radius="1.000000">
+                        <attached>
+                            <vertex id="6" d="160.148636" w="0.010000" ca="44.589096" sa="-153.816116" />
+                            <vertex id="7" d="225.602264" w="0.010000" ca="56.294891" sa="218.465714" />
+                        </attached>
+                    </bone>
+                </bones>
+            </skeleton>
         </layer>
-
-        <layer name="buildings2" x="1200.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
+        <layer name="buildings2" x="0.000000" y="0.000000" z="0.000000" alpha="1.000000" scale="1.000000" vis="1">
             <texture location="buildings2.png" x="0.000000" y="0.000000" scale="1.000000" />
             <mesh>
                 <vertices>
@@ -27,17 +68,43 @@
                     <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
                     <vertex x="1200.500000" y="477.440002" u="1.000417" v="0.954880" selected="0" />
                     <vertex x="1200.500000" y="1.280014" u="1.000417" v="0.002560" selected="0" />
+                    <vertex x="446.475861" y="184.513046" u="0.375534" v="0.470986" selected="1" />
+                    <vertex x="788.668945" y="235.492950" u="0.657224" v="0.470986" selected="0" />
+                    <vertex x="615.147888" y="476.619690" u="0.512623" v="0.953239" selected="0" />
+                    <vertex x="602.753540" y="1.126785" u="0.502295" v="0.002254" selected="0" />
                 </vertices>
                 <faces>
                     <face v0="3" v1="1" v2="0" />
                     <face v0="0" v1="3" v2="2" />
+                    <face v0="7" v1="1" v2="4" />
+                    <face v0="4" v1="7" v2="5" />
+                    <face v0="5" v1="4" v2="6" />
+                    <face v0="0" v1="4" v2="6" />
+                    <face v0="6" v1="0" v2="1" />
+                    <face v0="1" v1="4" v2="5" />
+                    <face v0="5" v1="2" v2="6" />
+                    <face v0="5" v1="3" v2="2" />
                 </faces>
             </mesh>
+            <skeleton>
+                <joints>
+                    <joint x="615.147827" y="87.887344" fixed="1" selected="0" osc="0" />
+                    <joint x="620.781738" y="409.014099" fixed="1" selected="0" osc="0" />
+                    <joint x="617.473633" y="220.453766" fixed="0" selected="0" osc="0" />
+                </joints>
+                <bones>
+                    <bone j0="2" j1="1" stiffness="0.500000" lm="1.246382" lmmin="0.020000" lmmax="1.300000" tempo="0.083000" time="77.381271" size="138.596161" selected="1" radius="1.000000" />
+                    <bone j0="0" j1="2" stiffness="0.500000" lm="0.921826" lmmin="0.620000" lmmax="1.070000" tempo="0.020000" time="31.764385" size="135.253494" selected="0" radius="1.000000">
+                        <attached>
+                            <vertex id="4" d="172.696915" w="0.010000" ca="28.427691" sa="170.341095" />
+                        </attached>
+                    </bone>
+                </bones>
+            </skeleton>
         </layer>
-
         <layer name="noise" x="0.000000" y="0.000000" z="0.000000" alpha="0.700000" scale="1.000000" vis="1">
             <texture location="noise.png" x="0.000000" y="0.000000" scale="1.000000" />
-            <mesh> 
+            <mesh>
                 <vertices>
                     <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
                     <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
@@ -52,7 +119,7 @@
         </layer>
         <layer name="static" x="0.000000" y="0.000000" z="0.000000" alpha="0.700000" scale="1.000000" vis="1">
             <texture location="static.png" x="0.000000" y="0.000000" scale="1.000000" />
-            <mesh> 
+            <mesh>
                 <vertices>
                     <vertex x="-2.699951" y="476.159973" u="-0.002250" v="0.952320" selected="0" />
                     <vertex x="-5.259979" y="0.000015" u="-0.004383" v="0.000000" selected="0" />
@@ -65,9 +132,9 @@
                 </faces>
             </mesh>
         </layer>
-        <layer name="leftFilter" x="0.000000" y="0.000000" z="0.000000" alpha="0.300000" scale="1.000000" vis="1" >
+        <layer name="leftFilter" x="0.000000" y="0.000000" z="0.000000" alpha="0.300000" scale="1.000000" vis="1">
             <texture location="leftFilter.png" x="0.000000" y="0.000000" scale="1.000000" />
-            <mesh> 
+            <mesh>
                 <vertices>
                     <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
                     <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
@@ -78,11 +145,11 @@
                     <face v0="3" v1="1" v2="0" />
                     <face v0="0" v1="3" v2="2" />
                 </faces>
-              </mesh>
-            </layer>
-        <layer name="rightFilter" x="0.000000" y="0.000000" z="0.000000" alpha="0.300000" scale="1.000000" vis="1" >
+            </mesh>
+        </layer>
+        <layer name="rightFilter" x="0.000000" y="0.000000" z="0.000000" alpha="0.300000" scale="1.000000" vis="1">
             <texture location="rightFilter.png" x="0.000000" y="0.000000" scale="1.000000" />
-            <mesh> 
+            <mesh>
                 <vertices>
                     <vertex x="-0.139954" y="477.439941" u="-0.000117" v="0.954880" selected="0" />
                     <vertex x="-0.139954" y="0.000031" u="-0.000117" v="0.000000" selected="0" />
@@ -93,8 +160,7 @@
                     <face v0="3" v1="1" v2="0" />
                     <face v0="0" v1="3" v2="2" />
                 </faces>
-              </mesh>
-            </layer>
-
+            </mesh>
+        </layer>
     </layer>
 </animata>
