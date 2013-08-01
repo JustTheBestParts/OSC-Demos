@@ -50,6 +50,7 @@ int maxTone1 = 52;
 
 int buildings1X = 0;
 int buildings2X  = 0;
+int buildingsInc = 2;
 
 
 int minTone2 = 62;
@@ -91,15 +92,15 @@ void draw() {
 }
 
 void shiftBuildings() {
-  buildings1X--;
-  buildings2X--;
+  buildings1X -= buildingsInc;
+  buildings2X -= buildingsInc;
   
   if (buildings1X < (width *-1) ) {
-    buildings1X = width;
+    buildings1X = width-buildingsInc;
   }
 
   if (buildings2X < (width *-1) ) {
-    buildings2X = width;
+    buildings2X = width-buildingsInc;
   }
 
 
