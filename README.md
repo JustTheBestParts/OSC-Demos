@@ -12,10 +12,24 @@ AnimatedBookCover
 
 This requires the [AnimataP5-ng](https://github.com/Neurogami/AnimataP5-ng) library.
 
+It works as the target of an [osc-scripter](https://github.com/Neurogami/osc-scripter) script.
+
+You can see this is action in the videos [An Intro to osc-scripter, Part 1](http://www.youtube.com/watch?v=DcOrADVDLo4) and  [osc-repl: A helper tool for Open Sound Control (OSC)](http://www.youtube.com/watch?v=_mVJs42Q_Js).
+
+Run by itself, the handsome wiggly fellow on the book cover shoud shimmy about.
+
+There are `osc-scripter` scripts to drive assorted animations of the pink background waves.
+
+Each of these ends with the `.oscr` file extension.
+
+
 
 Landscape
 ---------
 
+This requires the [AnimataP5-ng](https://github.com/Neurogami/AnimataP5-ng) library.
+
+That will get it running, but the real fun is when it is the target of an [osc-scripter](https://github.com/Neurogami/osc-scripter) script or two.
 
 
 
